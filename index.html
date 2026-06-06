@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1020" />
+  <title>用語ソリティア｜生成AIパスポート</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ===== スタート画面 ===== -->
+    <section id="screen-start" class="screen active">
+      <div class="hero">
+        <div class="hero-badge">生成AIパスポート</div>
+        <h1 class="hero-title">用語<span>ソリティア</span></h1>
+        <p class="hero-sub">用語と意味を結びつけて消していく<br>連鎖パズルで楽しく暗記！</p>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-label">カテゴリ</h2>
+        <div id="category-list" class="chip-grid"></div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-label">難易度</h2>
+        <div id="difficulty-list" class="chip-row"></div>
+      </div>
+
+      <button id="btn-start" class="btn-primary">ゲーム開始</button>
+      <p class="hint">用語（青）と意味（橙）を1枚ずつタップ。<br>連続正解で連鎖ボーナス！</p>
+    </section>
+
+    <!-- ===== ゲーム画面 ===== -->
+    <section id="screen-game" class="screen">
+      <header class="hud">
+        <button id="btn-quit" class="hud-quit" aria-label="やめる">✕</button>
+        <div class="hud-stat">
+          <span class="hud-label">スコア</span>
+          <span id="hud-score" class="hud-value">0</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-label">連鎖</span>
+          <span id="hud-chain" class="hud-value chain">0</span>
+        </div>
+        <div class="hud-stat">
+          <span class="hud-label">残り</span>
+          <span id="hud-remain" class="hud-value">0</span>
+        </div>
+      </header>
+
+      <div class="timebar-wrap">
+        <div id="timebar" class="timebar"></div>
+      </div>
+
+      <div id="board" class="board"></div>
+
+      <div id="toast" class="toast"></div>
+    </section>
+
+    <!-- ===== リザルト画面 ===== -->
+    <section id="screen-result" class="screen">
+      <div class="result-card">
+        <div id="result-rank" class="result-rank">S</div>
+        <h2 class="result-title">クリア！</h2>
+        <div class="result-stats">
+          <div class="result-row"><span>スコア</span><b id="result-score">0</b></div>
+          <div class="result-row"><span>最大連鎖</span><b id="result-maxchain">0</b></div>
+          <div class="result-row"><span>正答率</span><b id="result-acc">0%</b></div>
+          <div class="result-row"><span>タイム</span><b id="result-time">0.0s</b></div>
+        </div>
+        <button id="btn-retry" class="btn-primary">もう一度</button>
+        <button id="btn-home" class="btn-ghost">ホームへ</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="data.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
