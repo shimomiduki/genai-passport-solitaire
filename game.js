@@ -2,6 +2,11 @@
 
 const $ = (sel) => document.querySelector(sel);
 
+const TIMER_TICK_MS = 100;
+const TIMER_DECAY_PER_TICK = 0.05;
+const CORRECT_TIME_RECOVERY = 2.5;
+const MISS_TIME_PENALTY = 0.4;
+
 const state = {
   category: "all",
   difficulty: "normal",
@@ -15,7 +20,7 @@ const state = {
   correct: 0,
   miss: 0,
   startTime: 0,
-  timeLeft: 0,       // 連鎖タイマー（秒）
+  timeLeft: 0,       // 連鎖メーター残量
   timeMax: 0,
   timer: null,
   totalPairs: 0,
@@ -181,7 +186,7 @@ function handleCorrect(a, b) {
   state.score += gain;
 
   // タイマー回復
-  state.timeLeft = Math.min(state.timeMax, state.timeLeft + 1.2);
+  state.timeLeft = Math.min(state.timeMax, state.timeLeft + CORRECT_TIME_RECOVERY);
 
   a.el.classList.add("good");
   b.el.classList.add("good");
@@ -210,7 +215,7 @@ function handleMiss(a, b) {
   state.locked = true;
   state.chain = 0;
   state.miss++;
-  state.timeLeft = Math.max(0, state.timeLeft - 1.5); // ペナルティ
+  state.timeLeft = Math.max(0, state.timeLeft - MISS_TIME_PENALTY); // ペナルティ
 
   a.el.classList.add("bad");
   b.el.classList.add("bad");
@@ -250,27 +255,29 @@ function showToast(text, color) {
   t.classList.add("show");
 }
 
-// ---------- タイマー（連鎖維持の砂時計） ----------
+// ---------- タイマー（連鎖維持のメーター） ----------
 function startTimer() {
   stopTimer();
   state.timeLeft = state.timeMax;
   const bar = $("#timebar");
+  bar.style.transform = "scaleX(1)";
+  bar.classList.remove("low");
   state.timer = setInterval(() => {
     if (state.locked) return; // アニメ中は止める
-    state.timeLeft -= 0.1;
+    state.timeLeft -= TIMER_DECAY_PER_TICK;
     const ratio = Math.max(0, state.timeLeft / state.timeMax);
     bar.style.transform = `scaleX(${ratio})`;
-    bar.classList.toggle("low", ratio < 0.3);
+    bar.classList.toggle("low", ratio < 0.2);
     if (state.timeLeft <= 0) {
       if (state.chain > 0) {
-        // 連鎖が切れる
-        state.chain = 0;
+        // 時間切れでも連鎖を一気に切らず、ゆるく減らす
+        state.chain = Math.max(0, state.chain - 1);
         updateHUD();
-        showToast("連鎖切れ", "var(--meaning)");
+        showToast("連鎖 -1", "var(--meaning)");
       }
       state.timeLeft = state.timeMax;
     }
-  }, 100);
+  }, TIMER_TICK_MS);
 }
 function stopTimer() {
   if (state.timer) clearInterval(state.timer);
