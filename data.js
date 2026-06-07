@@ -14,6 +14,14 @@ const TERM_DATA = [
   { category: "basic", term: "過学習", meaning: "訓練データに適合しすぎて汎化性能が下がる" },
   { category: "basic", term: "汎化", meaning: "未知のデータにも対応できる能力" },
   { category: "basic", term: "特徴量", meaning: "予測に使うデータの特徴を表す変数" },
+  { category: "basic", term: "ANI", meaning: "特定タスクだけをこなす特化型AI" },
+  { category: "basic", term: "AGI", meaning: "人間のように幅広い課題へ対応できるAI" },
+  { category: "basic", term: "ダートマス会議", meaning: "1956年にAI研究の出発点となった会議" },
+  { category: "basic", term: "第一次AIブーム", meaning: "1950年代後半〜1960年代、探索・推論が中心" },
+  { category: "basic", term: "第二次AIブーム", meaning: "1980年代、エキスパートシステムが中心" },
+  { category: "basic", term: "第三次AIブーム", meaning: "2010年代、深層学習とビッグデータが特徴" },
+  { category: "basic", term: "2045年問題", meaning: "AIが人間の知能を超えるとされる予測問題" },
+  { category: "basic", term: "ノーフリーランチ定理", meaning: "全問題に万能な学習アルゴリズムはないという定理" },
 
   // ===== 生成AIの仕組み =====
   { category: "model", term: "生成AI", meaning: "文章や画像など新しいデータを作るAI" },
@@ -28,6 +36,21 @@ const TERM_DATA = [
   { category: "model", term: "GAN", meaning: "生成器と識別器を競わせる生成手法" },
   { category: "model", term: "マルチモーダル", meaning: "文字・画像・音声など複数種を扱うAI" },
   { category: "model", term: "埋め込み", meaning: "言葉を数値ベクトルで表現したもの" },
+  { category: "model", term: "アーリーストッピング", meaning: "検証性能が悪化する前に学習を止める過学習対策" },
+  { category: "model", term: "正則化", meaning: "過学習を抑えるためモデルの複雑さを制約する" },
+  { category: "model", term: "ドロップアウト", meaning: "一部のニューロンを無効化して過学習を抑える" },
+  { category: "model", term: "転移学習", meaning: "学習済みモデルの知識を別タスクに活用する" },
+  { category: "model", term: "ボルツマンマシン", meaning: "確率的に状態を更新して学習するニューラルネット" },
+  { category: "model", term: "制約付きボルツマンマシン", meaning: "層内結合を制限し学習しやすくしたモデル" },
+  { category: "model", term: "入力層", meaning: "データをニューラルネットへ受け渡す層" },
+  { category: "model", term: "隠れ層", meaning: "入力と出力の間で特徴を変換する層" },
+  { category: "model", term: "CNN（畳み込みニューラルネットワーク）", meaning: "畳み込みで画像の特徴を抽出するネットワーク" },
+  { category: "model", term: "RNN", meaning: "系列データを前の状態を使って処理するネットワーク" },
+  { category: "model", term: "勾配消失問題", meaning: "深い層で勾配が小さくなり学習が進みにくい問題" },
+  { category: "model", term: "LSTM", meaning: "長期記憶の仕組みでRNNの弱点を補うモデル" },
+  { category: "model", term: "Attention", meaning: "重要な情報へ重み付けして注目する仕組み" },
+  { category: "model", term: "MLM", meaning: "隠した単語を文脈から予測する事前学習タスク" },
+  { category: "model", term: "NSP", meaning: "2文が連続するか判定するBERTの事前学習タスク" },
 
   // ===== プロンプト =====
   { category: "prompt", term: "プロンプト", meaning: "生成AIへの指示・入力文" },
@@ -142,7 +165,7 @@ const CATEGORIES = [
 ];
 
 const DIFFICULTIES = [
-  { id: "easy",   label: "やさしい", pairs: 4, time: 8 },
-  { id: "normal", label: "ふつう",   pairs: 6, time: 6 },
-  { id: "hard",   label: "むずかしい", pairs: 8, time: 5 },
+  { id: "easy",   label: "やさしい", pairs: 4, time: 18 },
+  { id: "normal", label: "ふつう",   pairs: 6, time: 15 },
+  { id: "hard",   label: "むずかしい", pairs: 8, time: 12 },
 ];
